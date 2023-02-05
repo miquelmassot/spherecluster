@@ -7,8 +7,8 @@ from joblib import Parallel, delayed
 from sklearn.cluster import KMeans
 
 # from sklearn.cluster import _k_means
-from sklearn.cluster import _k_means_fast as _k_means
-from sklearn.cluster.k_means_ import (
+from mlinsights.mlmodel import _kmeans_022 as _k_means
+from .regacy import (
     _check_sample_weight,
     _init_centroids,
     _labels_inertia,
@@ -22,8 +22,8 @@ from sklearn.utils.validation import _num_samples
 
 
 def _spherical_kmeans_single_lloyd(
-    X,
-    n_clusters,
+    X: np.ndarray,
+    n_clusters: int,
     sample_weight=None,
     max_iter=300,
     init="k-means++",

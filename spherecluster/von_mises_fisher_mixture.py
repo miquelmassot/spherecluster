@@ -8,7 +8,7 @@ from scipy.special import iv  # modified Bessel function of first kind, I_v
 from scipy.special import logsumexp
 
 from sklearn.base import BaseEstimator, ClusterMixin, TransformerMixin
-from sklearn.cluster.k_means_ import _init_centroids, _tolerance, _validate_center_shape
+from .regacy import _init_centroids, _tolerance, _validate_center_shape
 from sklearn.metrics.pairwise import cosine_distances
 from sklearn.preprocessing import normalize
 from sklearn.utils import check_array, check_random_state, as_float_array
