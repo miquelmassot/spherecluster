@@ -77,11 +77,11 @@ def _spherical_kmeans_single_lloyd(
             )
         else:
             centers = _k_means._centers_dense(
-                X.astype(np.float),
-                sample_weight.astype(np.float),
+                X.astype(np.float64),
+                sample_weight.astype(np.float64),
                 labels,
                 n_clusters,
-                distances.astype(np.float),
+                distances.astype(np.float64),
             )
 
         # l2-normalize centers (this is the main contibution here)
