@@ -1,14 +1,36 @@
+from pathlib import Path
+
 from setuptools import find_packages, setup
+
+# read the contents of README file
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
+
+GITHUB_URL = "https://github.com/miquelmassot/spherecluster"
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 setup(
     name="spherecluster",
     version="0.2.0",
     description="Clustering on the unit hypersphere in scikit-learn.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Jason Laska",
     author_email="jason@claralabs.com",
     maintainer="Miquel Massot",
     maintainer_email="miquel.massot@gmail.com",
     packages=find_packages(),
+    classifiers=classifiers,
     install_requires=[
         "numpy>=1.23.4",
         "scipy>=1.8.0",
@@ -29,6 +51,7 @@ setup(
         "ijson>=3.2.1",
         "six>=1.5",
     ],
-    url="https://github.com/miquelmassot/spherecluster",
+    project_urls={"Bug Reports": GITHUB_URL + "/issues", "Source": GITHUB_URL},
+    url=GITHUB_URL,
     license="MIT",
 )
