@@ -1,24 +1,4 @@
-from __future__ import print_function
-
-import sys
-
 from setuptools import find_packages, setup
-
-with open("requirements.txt") as f:
-    INSTALL_REQUIRES = [line.strip() for line in f.readlines() if line]
-
-
-try:
-    import numpy  # NOQA
-except ImportError:
-    print("numpy is required during installation")
-    sys.exit(1)
-
-try:
-    import scipy  # NOQA
-except ImportError:
-    print("scipy is required during installation")
-    sys.exit(1)
 
 setup(
     name="spherecluster",
@@ -29,7 +9,26 @@ setup(
     maintainer="Miquel Massot",
     maintainer_email="miquel.massot@gmail.com",
     packages=find_packages(),
-    install_requires=INSTALL_REQUIRES,
+    install_requires=[
+        "numpy>=1.23.4",
+        "scipy>=1.8.0",
+        "scikit-learn>=1.2.2",
+        "pytest>=7.1.2",
+        "nose>=1.3.7",
+        "joblib>=1.2.0",
+        "mlinsights>=0.3.649",
+        "threadpoolctl>=3.1.0",
+        "cython>=0.29.28",
+        "pandas>=1.4.2",
+        "matplotlib>=3.5.1",
+        "pandas-streaming>=0.3.239",
+        "attrs>=23.1.0",
+        "iniconfig>=1.1.1",
+        "packaging>=23.1",
+        "pluggy<2.0,>=0.12 ",
+        "ijson>=3.2.1",
+        "six>=1.5",
+    ],
     url="https://github.com/miquelmassot/spherecluster",
     license="MIT",
 )

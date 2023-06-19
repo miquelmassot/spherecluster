@@ -1,4 +1,0 @@
--r requirements.txt
-tabulate==0.8.2
-matplotlib==3.0.2
-seaborn==0.9
