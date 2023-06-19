@@ -6,24 +6,21 @@ from joblib import Parallel, delayed
 from numpy import i0  # modified Bessel function of first kind order 0, I_0
 from scipy.special import iv  # modified Bessel function of first kind, I_v
 from scipy.special import logsumexp
-
 from sklearn.base import BaseEstimator, ClusterMixin, TransformerMixin
-from .regacy import _init_centroids, _tolerance, _validate_center_shape
 from sklearn.metrics.pairwise import cosine_distances
 from sklearn.preprocessing import normalize
-from sklearn.utils import check_array, check_random_state, as_float_array
+from sklearn.utils import as_float_array, check_array, check_random_state
 from sklearn.utils.extmath import squared_norm
-from sklearn.utils.validation import FLOAT_DTYPES
-from sklearn.utils.validation import check_is_fitted
+from sklearn.utils.validation import FLOAT_DTYPES, check_is_fitted
 
 from . import spherical_kmeans
+from .regacy import _init_centroids, _tolerance, _validate_center_shape
 
 MAX_CONTENTRATION = 1e10
 
 
 def _inertia_from_labels(X, centers, labels):
-    """Compute inertia with cosine distance using known labels.
-    """
+    """Compute inertia with cosine distance using known labels."""
     n_examples, n_features = X.shape
     inertia = np.zeros((n_examples,))
     for ee in range(n_examples):
@@ -33,8 +30,7 @@ def _inertia_from_labels(X, centers, labels):
 
 
 def _labels_inertia(X, centers):
-    """Compute labels and inertia with cosine distance.
-    """
+    """Compute labels and inertia with cosine distance."""
     n_examples, n_features = X.shape
     n_clusters, n_features = centers.shape
 
@@ -114,7 +110,7 @@ def _S(kappa, alpha, beta):
     alpha = 1.0 * alpha
     beta = 1.0 * np.abs(beta)
     a_plus_b = alpha + beta
-    u = np.sqrt(kappa ** 2 + beta ** 2)
+    u = np.sqrt(kappa**2 + beta**2)
     if alpha == 0:
         alpha_scale = 0
     else:
@@ -205,7 +201,12 @@ def _init_unit_centers(X, n_clusters, random_state, init):
         return centers
 
     elif init == "spherical-k-means":
-        labels, inertia, centers, iters = spherical_kmeans._spherical_kmeans_single_lloyd(
+        (
+            labels,
+            inertia,
+            centers,
+            iters,
+        ) = spherical_kmeans._spherical_kmeans_single_lloyd(
             X, n_clusters, x_squared_norms=np.ones((n_examples,)), init="k-means++"
         )
 
@@ -510,8 +511,7 @@ def movMF(
     tol=1e-6,
     copy_x=True,
 ):
-    """Wrapper for parallelization of _movMF and running n_init times.
-    """
+    """Wrapper for parallelization of _movMF and running n_init times."""
     if n_init <= 0:
         raise ValueError(
             "Invalid number of initializations."

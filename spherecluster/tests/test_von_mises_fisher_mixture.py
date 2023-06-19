@@ -1,10 +1,9 @@
+import numpy as np
 import pytest
 import scipy as sp
-import numpy as np
 from numpy.testing import assert_almost_equal, assert_array_equal
-from spherecluster import VonMisesFisherMixture
-from spherecluster import von_mises_fisher_mixture
-from spherecluster import sample_vMF
+
+from spherecluster import VonMisesFisherMixture, sample_vMF, von_mises_fisher_mixture
 
 
 def test_vmf_log_dense():
@@ -59,7 +58,7 @@ def test_vmf_log_detect_breakage():
 
             try:
                 von_mises_fisher_mixture._vmf_log(X, kappa, mu)
-            except:
+            except Exception:
                 if first_breakage is None:
                     first_breakage = n_f
 
@@ -98,7 +97,7 @@ def test_maximization():
             concentrations[0],
         )
 
-        assert_almost_equal(1., weights[0])
+        assert_almost_equal(1.0, weights[0])
         assert_almost_equal(0.0, np.abs(kappa - concentrations[0]) / kappa, decimal=2)
         assert_almost_equal(0.0, np.linalg.norm(centers[0, :] - mu), decimal=2)
 
@@ -110,7 +109,7 @@ def test_maximization():
         {"posterior_type": "hard"},
         {"posterior_type": "soft", "n_jobs": 2},
         {"posterior_type": "hard", "n_jobs": 3},
-        {"posterior_type": "hard", "force_weights": np.ones(5) / 5.},
+        {"posterior_type": "hard", "force_weights": np.ones(5) / 5.0},
         {"posterior_type": "soft", "n_jobs": -1},
     ],
 )
@@ -159,7 +158,7 @@ def test_integration_dense(params_in):
         {"posterior_type": "hard"},
         {"posterior_type": "soft", "n_jobs": 2},
         {"posterior_type": "hard", "n_jobs": 3},
-        {"posterior_type": "hard", "force_weights": np.ones(5) / 5.},
+        {"posterior_type": "hard", "force_weights": np.ones(5) / 5.0},
         {"posterior_type": "soft", "n_jobs": -1},
     ],
 )

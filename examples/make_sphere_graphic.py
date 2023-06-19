@@ -1,8 +1,9 @@
 import sys
+
 import numpy as np
+import seaborn  # NOQA
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
-import seaborn  # NOQA
 
 from spherecluster import sample_vMF
 
@@ -10,7 +11,7 @@ plt.ion()
 
 n_clusters = 3
 mus = np.random.randn(3, n_clusters)
-mus, r = np.linalg.qr(mus, mode='reduced')
+mus, r = np.linalg.qr(mus, mode="reduced")
 
 kappas = [15, 15, 15]
 num_points_per_class = 250
@@ -23,24 +24,30 @@ for nn in range(n_clusters):
 
 fig = plt.figure(figsize=(8, 6))
 ax = fig.add_subplot(
-    1, 1, 1, aspect='equal', projection='3d',
-    adjustable='box-forced', xlim=[-1.1, 1.1], ylim=[-1.1, 1.1],
-    zlim=[-1.1, 1.1]
+    1,
+    1,
+    1,
+    aspect="equal",
+    projection="3d",
+    adjustable="box-forced",
+    xlim=[-1.1, 1.1],
+    ylim=[-1.1, 1.1],
+    zlim=[-1.1, 1.1],
 )
 
-colors = ['b', 'r', 'g']
+colors = ["b", "r", "g"]
 for nn in range(n_clusters):
     ax.scatter(Xs[nn][0, :], Xs[nn][1, :], Xs[nn][2, :], c=colors[nn])
 
-ax.set_aspect('equal')
-plt.axis('off')
+ax.set_aspect("equal")
+plt.axis("off")
 plt.show()
 
+
 def r_input(val=None):
-    val = val or ''
+    val = val or ""
     if sys.version_info[0] >= 3:
         return eval(input(val))
 
-    return raw_input(val)
 
 r_input()

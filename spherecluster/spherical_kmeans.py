@@ -4,10 +4,14 @@ import numpy as np
 import scipy.sparse as sp
 from joblib import Parallel, delayed
 
-from sklearn.cluster import KMeans
-
 # from sklearn.cluster import _k_means
 from mlinsights.mlmodel import _kmeans_022 as _k_means
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import normalize
+from sklearn.utils import check_array, check_random_state
+from sklearn.utils.extmath import row_norms, squared_norm
+from sklearn.utils.validation import _num_samples
+
 from .regacy import (
     _check_sample_weight,
     _init_centroids,
@@ -15,10 +19,6 @@ from .regacy import (
     _tolerance,
     _validate_center_shape,
 )
-from sklearn.preprocessing import normalize
-from sklearn.utils import check_array, check_random_state
-from sklearn.utils.extmath import row_norms, squared_norm
-from sklearn.utils.validation import _num_samples
 
 
 def _spherical_kmeans_single_lloyd(
@@ -134,8 +134,7 @@ def spherical_k_means(
     algorithm="auto",
     return_n_iter=False,
 ):
-    """Modified from sklearn.cluster.k_means_.k_means.
-    """
+    """Modified from sklearn.cluster.k_means_.k_means."""
     if n_init <= 0:
         raise ValueError(
             "Invalid number of initializations."
@@ -354,7 +353,12 @@ class SphericalKMeans(KMeans):
 
         # TODO: add check that all data is unit-normalized
 
-        self.cluster_centers_, self.labels_, self.inertia_, self.n_iter_ = spherical_k_means(
+        (
+            self.cluster_centers_,
+            self.labels_,
+            self.inertia_,
+            self.n_iter_,
+        ) = spherical_k_means(
             X,
             n_clusters=self.n_clusters,
             sample_weight=sample_weight,

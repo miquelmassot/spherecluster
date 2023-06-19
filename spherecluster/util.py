@@ -27,7 +27,7 @@ def sample_vMF(mu, kappa, num_samples):
         v = _sample_orthonormal_to(mu)
 
         # compute new point
-        result[nn, :] = v * np.sqrt(1. - w ** 2) + w * mu
+        result[nn, :] = v * np.sqrt(1.0 - w**2) + w * mu
 
     return result
 
@@ -37,15 +37,15 @@ def _sample_weight(kappa, dim):
     surface of the sphere.
     """
     dim = dim - 1  # since S^{n-1}
-    b = dim / (np.sqrt(4. * kappa ** 2 + dim ** 2) + 2 * kappa)
-    x = (1. - b) / (1. + b)
-    c = kappa * x + dim * np.log(1 - x ** 2)
+    b = dim / (np.sqrt(4.0 * kappa**2 + dim**2) + 2 * kappa)
+    x = (1.0 - b) / (1.0 + b)
+    c = kappa * x + dim * np.log(1 - x**2)
 
     while True:
-        z = np.random.beta(dim / 2., dim / 2.)
-        w = (1. - (1. + b) * z) / (1. - (1. - b) * z)
+        z = np.random.beta(dim / 2.0, dim / 2.0)
+        w = (1.0 - (1.0 + b) * z) / (1.0 - (1.0 - b) * z)
         u = np.random.uniform(low=0, high=1)
-        if kappa * w + dim * np.log(1. - x * w) - c >= np.log(u):
+        if kappa * w + dim * np.log(1.0 - x * w) - c >= np.log(u):
             return w
 
 

@@ -1,9 +1,11 @@
 from __future__ import print_function
+
 import sys
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 with open("requirements.txt") as f:
-    INSTALL_REQUIRES = [l.strip() for l in f.readlines() if l]
+    INSTALL_REQUIRES = [line.strip() for line in f.readlines() if line]
 
 
 try:
