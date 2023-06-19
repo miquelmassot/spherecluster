@@ -6,6 +6,18 @@ from mlinsights.mlmodel._kmeans_022 import (
 from scipy.sparse import issparse
 from sklearn.cluster import KMeans
 from sklearn.cluster._kmeans import _check_sample_weight
+from sklearn.utils.sparsefuncs import mean_variance_axis
+
+
+def _tolerance(X, tol):
+    """Return a tolerance which is dependent on the dataset."""
+    if tol == 0:
+        return 0
+    if numpy.issparse(X):
+        variances = mean_variance_axis(X, axis=0)[1]
+    else:
+        variances = numpy.var(X, axis=0)
+    return numpy.mean(variances) * tol
 
 
 def _labels_inertia(

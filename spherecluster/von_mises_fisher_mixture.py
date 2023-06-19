@@ -14,7 +14,7 @@ from sklearn.utils.extmath import squared_norm
 from sklearn.utils.validation import FLOAT_DTYPES, check_is_fitted
 
 from . import spherical_kmeans
-from .regacy import _init_centroids, _tolerance, _validate_center_shape
+from .legacy import _init_centroids, _tolerance, _validate_center_shape
 
 MAX_CONTENTRATION = 1e10
 

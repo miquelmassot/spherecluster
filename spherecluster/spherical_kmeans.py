@@ -10,15 +10,9 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import normalize
 from sklearn.utils import check_array, check_random_state
 from sklearn.utils.extmath import row_norms, squared_norm
-from sklearn.utils.validation import _num_samples
+from sklearn.utils.validation import _check_sample_weight, _num_samples
 
-from .regacy import (
-    _check_sample_weight,
-    _init_centroids,
-    _labels_inertia,
-    _tolerance,
-    _validate_center_shape,
-)
+from .legacy import _init_centroids, _labels_inertia, _tolerance, _validate_center_shape
 
 
 def _spherical_kmeans_single_lloyd(
