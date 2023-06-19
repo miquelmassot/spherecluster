@@ -20,7 +20,7 @@ classifiers = [
 ]
 
 setup(
-    name="spherecluster",
+    name="spherecluster2",
     version="0.2.0",
     description="Clustering on the unit hypersphere in scikit-learn.",
     long_description=long_description,
