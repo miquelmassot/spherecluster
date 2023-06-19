@@ -21,7 +21,7 @@ classifiers = [
 
 setup(
     name="spherecluster2",
-    version="0.2.0",
+    version="0.2.1",
     description="Clustering on the unit hypersphere in scikit-learn.",
     long_description=long_description,
     long_description_content_type="text/markdown",
